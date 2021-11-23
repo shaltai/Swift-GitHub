@@ -12,10 +12,14 @@ class ViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
+      setup()
+      
+   }
+   
+   func setup() {
       searchResultsTableView.delegate = self
       searchResultsTableView.dataSource = self
       title = "Search in GitHub"
-      
    }
    
    @IBAction func searchButton(_ sender: UIButton) {
@@ -32,10 +36,12 @@ class ViewController: UIViewController {
             self.models = repos.items
             self.searchResultsTableView.reloadData()
          }
-      default:
-         break
+      case .commits:
+         Network.shared.fetchData(path: path.rawValue, query: text, type: Commits.self) { commits in
+            self.models = commits.items
+            self.searchResultsTableView.reloadData()
+         }
       }
-      
    }
    
    @IBAction func searchSegmentedControl(_ sender: UISegmentedControl) {
@@ -45,7 +51,7 @@ class ViewController: UIViewController {
       case 1:
          path = .repositories
       case 2:
-         path = .code
+         path = .commits
       default:
          break
       }
@@ -70,13 +76,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
       case .repositories:
 
-         let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath) as! ReposTableViewCell
+         let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath) as! RepoTableViewCell
          cell.initUserCell(repo: models[indexPath.row] as! Repos.Items)
          return cell
 
       default:
-         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
-         cell.initUserCell(user: models[indexPath.row] as! Users.Items)
+         let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell", for: indexPath) as! CommitTableViewCell
+         cell.initUserCell(commit: models[indexPath.row] as! Commits.Items)
          return cell
       }
    }

@@ -14,7 +14,7 @@ class Network {
          let api = "https://api.github.com"
          let query = "?q=\(query)"
          guard let url = URL(string: api + path + query) else { return }
-         
+         print(url)
          URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                do {

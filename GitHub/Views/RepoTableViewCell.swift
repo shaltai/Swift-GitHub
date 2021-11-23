@@ -1,32 +1,51 @@
 import UIKit
 
-class ReposTableViewCell: UITableViewCell {
+class RepoTableViewCell: UITableViewCell {
    let fullNameLabel = UILabel()
    let descriptionLabel = UILabel()
    let languageLabel = UILabel()
-   let stargazersCount = UILabel()
-   let updatedAt = UILabel()
+   let stargazersCountLabel = UILabel()
+   let updatedAtLabel = UILabel()
    
    override func awakeFromNib() {
       super.awakeFromNib()
       
-      
       setup()
    }
+   
+//   Почему не загружается дата?
+//   func formatDate(date: String, completionHandler: @escaping (String) -> Void) {
+//      let formatter = DateFormatter()
+//      formatter.dateFormat = "E, d MMM"
+//      if let date = formatter.date(from: date) {
+//         DispatchQueue.main.async {
+//            let formattedDate = formatter.string(from: date)
+//            print(formattedDate)
+//         }
+//      }
+//   }
    
    func initUserCell(repo: Repos.Items) {
       fullNameLabel.text = repo.full_name
       descriptionLabel.text = repo.description
       languageLabel.text = repo.language
-      stargazersCount.text = "⭐️ \(repo.stargazers_count)"
-      updatedAt.text = repo.updated_at
+      stargazersCountLabel.text = "⭐️ \(repo.stargazers_count)"
+      
+//   Почему не загружается дата?
+//      formatDate(date: repo.updated_at) { date in
+//         self.updatedAt.text = date
+//      }
+      
+      let formatter = DateFormatter()
+      formatter.dateFormat = "E, d MMM"
+      updatedAtLabel.text = formatter.string(from: repo.updatedAt)
    }
    
    func setup() {
       // settings
       backgroundColor = .systemGray6
       // subviews
-      let stackView = UIStackView(arrangedSubviews: [stargazersCount, languageLabel, updatedAt])
+      let stackView = UIStackView(arrangedSubviews: [stargazersCountLabel, languageLabel, updatedAtLabel])
       stackView.distribution = .equalSpacing
       addSubview(fullNameLabel)
       addSubview(descriptionLabel)

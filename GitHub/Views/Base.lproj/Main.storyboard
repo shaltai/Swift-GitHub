@@ -24,7 +24,7 @@
                                 <segments>
                                     <segment title="Users"/>
                                     <segment title="Repos"/>
-                                    <segment title="Code"/>
+                                    <segment title="Commit"/>
                                 </segments>
                                 <connections>
                                     <action selector="searchSegmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="kpW-Af-bDs"/>
@@ -63,10 +63,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepoCell" id="BkP-pL-SO5" customClass="ReposTableViewCell" customModule="GitHub" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepoCell" id="BkP-pL-SO5" customClass="RepoTableViewCell" customModule="GitHub" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="88" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BkP-pL-SO5" id="SFD-JY-0pJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommitCell" id="AwU-Rs-TKp" customClass="CommitTableViewCell" customModule="GitHub" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="131.5" width="343" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AwU-Rs-TKp" id="mf5-Mq-5aG">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
