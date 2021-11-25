@@ -20,26 +20,35 @@ class ViewController: UIViewController {
       searchResultsTableView.delegate = self
       searchResultsTableView.dataSource = self
       title = "Search in GitHub"
+      searchResultsTableView.backgroundColor = .white
    }
    
    @IBAction func searchButton(_ sender: UIButton) {
-      guard let text = searchTextField.text, text.isEmpty == false else { return }
+      guard let text = searchTextField.text else { return }
       
-      switch path {
-      case .users:
-         Network.shared.fetchData(path: path.rawValue, query: text, type: Users.self) { users in
-            self.models = users.items
-            self.searchResultsTableView.reloadData()
-         }
-      case .repositories:
-         Network.shared.fetchData(path: path.rawValue, query: text, type: Repos.self) { repos in
-            self.models = repos.items
-            self.searchResultsTableView.reloadData()
-         }
-      case .commits:
-         Network.shared.fetchData(path: path.rawValue, query: text, type: Commits.self) { commits in
-            self.models = commits.items
-            self.searchResultsTableView.reloadData()
+      if text.isEmpty {
+         // Reset table
+         models = []
+         searchResultsTableView.reloadData()
+         
+      } else {
+         // Request
+         switch path {
+         case .users:
+            Network.shared.fetchData(path: path.rawValue, query: text, type: Users.self) { users in
+               self.models = users.items
+               self.searchResultsTableView.reloadData()
+            }
+         case .repositories:
+            Network.shared.fetchData(path: path.rawValue, query: text, type: Repos.self) { repos in
+               self.models = repos.items
+               self.searchResultsTableView.reloadData()
+            }
+         case .commits:
+            Network.shared.fetchData(path: path.rawValue, query: text, type: Commits.self) { commits in
+               self.models = commits.items
+               self.searchResultsTableView.reloadData()
+            }
          }
       }
    }
@@ -69,17 +78,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
       
       switch path {
       case .users:
-
+         
          let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
          cell.initUserCell(user: models[indexPath.row] as! Users.Items)
          return cell
-
+         
       case .repositories:
-
+         
          let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath) as! RepoTableViewCell
          cell.initUserCell(repo: models[indexPath.row] as! Repos.Items)
          return cell
-
+         
       default:
          let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell", for: indexPath) as! CommitTableViewCell
          cell.initUserCell(commit: models[indexPath.row] as! Commits.Items)
