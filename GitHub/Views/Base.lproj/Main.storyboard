@@ -80,6 +80,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="q2x-MZ-uwc"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="mMG-Mv-Pco"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -104,11 +108,44 @@
                     <connections>
                         <outlet property="searchResultsTableView" destination="Edj-vt-HJo" id="7xd-vq-DB1"/>
                         <outlet property="searchTextField" destination="KWz-Yc-TkU" id="rSW-Ao-q3M"/>
+                        <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowUserRepos" id="Sxy-RY-RLn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1077.5999999999999" y="69.715142428785612"/>
+        </scene>
+        <!--User Repos View Controller-->
+        <scene sceneID="Sxf-S1-mFf">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="N7b-4Z-ssh" customClass="UserReposViewController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="uDY-p7-J05">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserReposCell" id="43o-g7-Alu" customClass="RepoTableViewCell" customModule="GitHub" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="375" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="43o-g7-Alu" id="zbA-9P-QMc">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="N7b-4Z-ssh" id="qp5-ao-FcU"/>
+                            <outlet property="delegate" destination="N7b-4Z-ssh" id="6OQ-cE-VTT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wTV-ft-r9f"/>
+                    <connections>
+                        <outlet property="userReposTableView" destination="uDY-p7-J05" id="fVB-KL-EVd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OeW-Np-ICG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1954" y="70"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cKo-qu-cSd">

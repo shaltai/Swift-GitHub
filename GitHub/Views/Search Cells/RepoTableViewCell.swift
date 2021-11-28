@@ -25,7 +25,7 @@ class RepoTableViewCell: UITableViewCell {
 //      }
 //   }
    
-   func initUserCell(repo: Repos.Items) {
+   func initCell(repo: Repos.Items) {
       fullNameLabel.text = repo.full_name
       descriptionLabel.text = repo.description
       languageLabel.text = repo.language

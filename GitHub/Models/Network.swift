@@ -12,8 +12,9 @@ class Network {
       if path.isEmpty == false,
          query.isEmpty == false {
          let api = "https://api.github.com"
-         let query = "?q=\(query)"
+         let query = query
          guard let url = URL(string: api + path + query) else { return }
+
          URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
                do {
@@ -29,3 +30,5 @@ class Network {
       }
    }
 }
+
+// https://api.github.com/search/code?q=somequery+language:swift

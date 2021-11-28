@@ -8,11 +8,10 @@ class UserTableViewCell: UITableViewCell {
    override func awakeFromNib() {
       super.awakeFromNib()
 
-      
       setup()
    }
    
-   func initUserCell(user: Users.Items) {
+   func initCell(user: Users.Items) {
       loginLabel.text = user.login
       idLabel.text = "\(user.id)"
       guard let avatarUrl = URL(string: user.avatar_url) else { return }

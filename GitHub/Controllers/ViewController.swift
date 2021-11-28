@@ -1,13 +1,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-   var models: [Codable] = []
-   var path = Path.users
-   
+   private var models: [Codable] = []
+   private var path = Path.users
    
    @IBOutlet weak var searchTextField: UITextField!
    @IBOutlet weak var searchResultsTableView: UITableView!
-   
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -16,36 +14,58 @@ class ViewController: UIViewController {
       
    }
    
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if let vc = segue.destination as? UserReposViewController,
+         segue.identifier == "ShowUserRepos" {
+         
+         // Index
+         guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
+         
+         // User name at particular index
+         let userItem = models[indexPath.row] as! Users.Items
+         let user = userItem.login
+         
+         Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
+
+            vc.initUserRepos(repos: repos, user: user)
+            vc.userReposTableView.reloadData()
+         }
+         // Deselect row
+         searchResultsTableView.deselectRow(at: indexPath, animated: true)
+      }
+   }
+   
    func setup() {
-      searchResultsTableView.delegate = self
-      searchResultsTableView.dataSource = self
       title = "Search in GitHub"
-      searchResultsTableView.backgroundColor = .white
+      searchResultsTableView.backgroundColor = .systemBackground
    }
    
    @IBAction func searchButton(_ sender: UIButton) {
       guard let text = searchTextField.text else { return }
       
       if text.isEmpty {
+         
          // Reset table
          models = []
          searchResultsTableView.reloadData()
          
       } else {
+         let query = "?q=\(text)"
+         
          // Request
          switch path {
          case .users:
-            Network.shared.fetchData(path: path.rawValue, query: text, type: Users.self) { users in
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Users.self) { users in
                self.models = users.items
                self.searchResultsTableView.reloadData()
             }
          case .repositories:
-            Network.shared.fetchData(path: path.rawValue, query: text, type: Repos.self) { repos in
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Repos.self) { repos in
                self.models = repos.items
                self.searchResultsTableView.reloadData()
             }
          case .commits:
-            Network.shared.fetchData(path: path.rawValue, query: text, type: Commits.self) { commits in
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Commits.self) { commits in
                self.models = commits.items
                self.searchResultsTableView.reloadData()
             }
@@ -73,28 +93,32 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
       return models.count
    }
    
-   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
       switch path {
       case .users:
          
          let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserTableViewCell
-         cell.initUserCell(user: models[indexPath.row] as! Users.Items)
+         cell.initCell(user: models[indexPath.row] as! Users.Items)
          return cell
          
       case .repositories:
          
          let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath) as! RepoTableViewCell
-         cell.initUserCell(repo: models[indexPath.row] as! Repos.Items)
+         cell.initCell(repo: models[indexPath.row] as! Repos.Items)
          return cell
          
       default:
          let cell = tableView.dequeueReusableCell(withIdentifier: "CommitCell", for: indexPath) as! CommitTableViewCell
-         cell.initUserCell(commit: models[indexPath.row] as! Commits.Items)
+         cell.initCell(commit: models[indexPath.row] as! Commits.Items)
          return cell
       }
    }
+   
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      performSegue(withIdentifier: "ShowUserRepos", sender: indexPath)
+   }
+   
    
    
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,5 +126,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
    }
 }
 
-//      let secret = "f231a80c7b8df2b49b236dcfb007efef68c4f506"
-//      let id = "dc9d3806ce3ddc2fd895"

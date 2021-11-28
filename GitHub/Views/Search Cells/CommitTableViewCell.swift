@@ -13,7 +13,7 @@ class CommitTableViewCell: UITableViewCell {
       setup()
    }
    
-   func initUserCell(commit: Commits.Items) {
+   func initCell(commit: Commits.Items) {
       fullNameLabel.text = commit.repository.full_name
       messageLabel.text = commit.commit.message
       committerLabel.text = commit.commit.committer.name

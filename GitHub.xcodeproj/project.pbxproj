@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443715A3274F969B00D72D9E /* UserReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443715A2274F969B00D72D9E /* UserReposViewController.swift */; };
 		443F4402274795D100ED5B32 /* Constraints Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F4401274795D100ED5B32 /* Constraints Extension.swift */; };
 		443F44062747CE3900ED5B32 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F44052747CE3900ED5B32 /* Network.swift */; };
 		4447AEAB27457CC600B9161B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447AEAA27457CC600B9161B /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		443715A2274F969B00D72D9E /* UserReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReposViewController.swift; sourceTree = "<group>"; };
 		443F4401274795D100ED5B32 /* Constraints Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constraints Extension.swift"; sourceTree = "<group>"; };
 		443F44052747CE3900ED5B32 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4447AEA727457CC600B9161B /* GitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,10 +55,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		443715A1274F95FC00D72D9E /* Search Cells */ = {
+			isa = PBXGroup;
+			children = (
+				445E4C382746F80B008EFCA9 /* UserTableViewCell.swift */,
+				44C74691274AC8B60083F267 /* RepoTableViewCell.swift */,
+				44736096274D576500801C1A /* CommitTableViewCell.swift */,
+			);
+			path = "Search Cells";
+			sourceTree = "<group>";
+		};
 		443F4403274795ED00ED5B32 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				4447AEAE27457CC600B9161B /* ViewController.swift */,
+				443715A2274F969B00D72D9E /* UserReposViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -65,9 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				4447AEB027457CC600B9161B /* Main.storyboard */,
-				445E4C382746F80B008EFCA9 /* UserTableViewCell.swift */,
-				44C74691274AC8B60083F267 /* RepoTableViewCell.swift */,
-				44736096274D576500801C1A /* CommitTableViewCell.swift */,
+				443715A1274F95FC00D72D9E /* Search Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +204,7 @@
 				4447AEB527457CC600B9161B /* GitHub.xcdatamodeld in Sources */,
 				4447AEC227458A2500B9161B /* Model.swift in Sources */,
 				445E4C392746F80B008EFCA9 /* UserTableViewCell.swift in Sources */,
+				443715A3274F969B00D72D9E /* UserReposViewController.swift in Sources */,
 				44736097274D576500801C1A /* CommitTableViewCell.swift in Sources */,
 				4447AEAD27457CC600B9161B /* SceneDelegate.swift in Sources */,
 				44B17C5F27499F4D00C06576 /* Path.swift in Sources */,
