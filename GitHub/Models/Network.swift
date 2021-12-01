@@ -14,8 +14,11 @@ class Network {
          let api = "https://api.github.com"
          let query = query
          guard let url = URL(string: api + path + query) else { return }
+         var request = URLRequest(url: url)
+         request.setValue("token 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", forHTTPHeaderField: "Authorization")
+         request.setValue("application/vnd.github.v3.text-match+json", forHTTPHeaderField: "Accept")
 
-         URLSession.shared.dataTask(with: url) { data, response, error in
+         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
                do {
                   let value = try JSONDecoder().decode(T.self, from: data)

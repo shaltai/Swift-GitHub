@@ -16,43 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Dd-WS-o0n">
-                                <rect key="frame" x="16" y="112" width="343" height="49"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="eyb-Aq-TIS"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Users"/>
-                                    <segment title="Repos"/>
-                                    <segment title="Commit"/>
-                                </segments>
-                                <connections>
-                                    <action selector="searchSegmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="kpW-Af-bDs"/>
-                                </connections>
-                            </segmentedControl>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KWz-Yc-TkU">
-                                <rect key="frame" x="16" y="176" width="343" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="6Go-xv-5cs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sno-uH-Oql">
-                                <rect key="frame" x="319" y="184" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Sno-uH-Oql" secondAttribute="height" multiplier="1:1" id="bG5-22-08y"/>
-                                </constraints>
-                                <buttonConfiguration key="configuration" style="filled" image="magnifyingglass" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="medium"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eXL-kB-8Xv"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Edj-vt-HJo">
-                                <rect key="frame" x="16" y="240" width="343" height="411"/>
+                                <rect key="frame" x="16" y="60" width="343" height="591"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserCell" id="fty-s7-K0F" customClass="UserTableViewCell" customModule="GitHub" customModuleProvider="target">
@@ -89,25 +54,15 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7Dd-WS-o0n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="5eV-vF-m9f"/>
-                            <constraint firstItem="Sno-uH-Oql" firstAttribute="top" secondItem="KWz-Yc-TkU" secondAttribute="top" constant="8" id="BDQ-9t-eKJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Edj-vt-HJo" secondAttribute="trailing" constant="16" id="Dvs-2u-csX"/>
                             <constraint firstItem="Edj-vt-HJo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="PnR-WC-3d4"/>
-                            <constraint firstItem="KWz-Yc-TkU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="bRF-js-zkj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KWz-Yc-TkU" secondAttribute="trailing" constant="16" id="ddr-8B-JJc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Dd-WS-o0n" secondAttribute="trailing" constant="16" id="gzK-ma-uUh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Edj-vt-HJo" secondAttribute="bottom" constant="16" id="hn2-0a-aLh"/>
-                            <constraint firstItem="Edj-vt-HJo" firstAttribute="top" secondItem="KWz-Yc-TkU" secondAttribute="bottom" constant="16" id="nmt-tv-g6J"/>
-                            <constraint firstItem="Sno-uH-Oql" firstAttribute="bottom" secondItem="KWz-Yc-TkU" secondAttribute="bottom" constant="-8" id="qW8-Hm-Qf0"/>
-                            <constraint firstItem="7Dd-WS-o0n" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="qhO-GZ-heI"/>
-                            <constraint firstItem="KWz-Yc-TkU" firstAttribute="top" secondItem="7Dd-WS-o0n" secondAttribute="bottom" constant="16" id="ywW-2H-5UW"/>
-                            <constraint firstItem="Sno-uH-Oql" firstAttribute="trailing" secondItem="KWz-Yc-TkU" secondAttribute="trailing" constant="-8" id="zY9-0r-1mB"/>
+                            <constraint firstItem="Edj-vt-HJo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="uvL-EC-D1n"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="c1f-9S-5wi"/>
                     <connections>
                         <outlet property="searchResultsTableView" destination="Edj-vt-HJo" id="7xd-vq-DB1"/>
-                        <outlet property="searchTextField" destination="KWz-Yc-TkU" id="rSW-Ao-q3M"/>
                         <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowUserRepos" id="Sxy-RY-RLn"/>
                     </connections>
                 </viewController>
@@ -167,7 +122,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

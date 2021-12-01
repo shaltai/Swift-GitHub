@@ -3,14 +3,15 @@ import UIKit
 class ViewController: UIViewController {
    private var models: [Codable] = []
    private var path = Path.users
+   private let searchController = UISearchController()
    
-   @IBOutlet weak var searchTextField: UITextField!
    @IBOutlet weak var searchResultsTableView: UITableView!
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
       setup()
+      setupSearchController()
       
    }
    
@@ -40,52 +41,17 @@ class ViewController: UIViewController {
       searchResultsTableView.backgroundColor = .systemBackground
    }
    
-   @IBAction func searchButton(_ sender: UIButton) {
-      guard let text = searchTextField.text else { return }
+   // Search
+   func setupSearchController() {
+      searchController.delegate = self
+      searchController.searchBar.delegate = self
+      searchController.searchResultsUpdater = self
       
-      if text.isEmpty {
-         
-         // Reset table
-         models = []
-         searchResultsTableView.reloadData()
-         
-      } else {
-         let query = "?q=\(text)"
-         
-         // Request
-         switch path {
-         case .users:
-            Network.shared.fetchData(path: path.rawValue, query: query, type: Users.self) { users in
-               self.models = users.items
-               self.searchResultsTableView.reloadData()
-            }
-         case .repositories:
-            Network.shared.fetchData(path: path.rawValue, query: query, type: Repos.self) { repos in
-               self.models = repos.items
-               self.searchResultsTableView.reloadData()
-            }
-         case .commits:
-            Network.shared.fetchData(path: path.rawValue, query: query, type: Commits.self) { commits in
-               self.models = commits.items
-               self.searchResultsTableView.reloadData()
-            }
-         }
-      }
+      navigationItem.searchController = searchController
+      searchController.searchBar.scopeButtonTitles = ["Users", "Repos", "Commits"]
+      searchController.automaticallyShowsScopeBar = false
+      searchController.searchBar.showsScopeBar = true
    }
-   
-   @IBAction func searchSegmentedControl(_ sender: UISegmentedControl) {
-      switch sender.selectedSegmentIndex {
-      case 0:
-         path = .users
-      case 1:
-         path = .repositories
-      case 2:
-         path = .commits
-      default:
-         break
-      }
-   }
-   
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -119,10 +85,57 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
       performSegue(withIdentifier: "ShowUserRepos", sender: indexPath)
    }
    
-   
-   
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       return 128
+   }
+}
+
+extension ViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+   func updateSearchResults(for searchController: UISearchController) {
+      
+      guard let text = searchController.searchBar.text else { return }
+      
+      if text.isEmpty {
+         
+         // Reset table
+         models = []
+         searchResultsTableView.reloadData()
+         
+      } else {
+         let query = "?q=\(text)"
+         
+         // Request
+         switch path {
+         case .users:
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Users.self) { users in
+               self.models = users.items
+               self.searchResultsTableView.reloadData()
+            }
+         case .repositories:
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Repos.self) { repos in
+               self.models = repos.items
+               self.searchResultsTableView.reloadData()
+            }
+         case .commits:
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Commits.self) { commits in
+               self.models = commits.items
+               self.searchResultsTableView.reloadData()
+            }
+         }
+      }
+   }
+   
+   func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+      switch searchBar.selectedScopeButtonIndex {
+      case 0:
+         path = .users
+      case 1:
+         path = .repositories
+      case 2:
+         path = .commits
+      default:
+         break
+      }
    }
 }
 
