@@ -56,7 +56,7 @@ struct Code: Codable {
          }
          let matches: [Matches]
       }
-      let text_matches: TextMatches
+      let text_matches: [TextMatches]
    }
    let items: [Items]
 }

@@ -18,8 +18,11 @@
 		4447AEB727457CC700B9161B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4447AEB627457CC700B9161B /* Assets.xcassets */; };
 		4447AEBA27457CC700B9161B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4447AEB827457CC700B9161B /* LaunchScreen.storyboard */; };
 		4447AEC227458A2500B9161B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447AEC127458A2500B9161B /* Model.swift */; };
+		4457227C2758C8570020EB01 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4457227B2758C8570020EB01 /* Constants.swift */; };
 		445E4C392746F80B008EFCA9 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445E4C382746F80B008EFCA9 /* UserTableViewCell.swift */; };
 		44736097274D576500801C1A /* CommitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44736096274D576500801C1A /* CommitTableViewCell.swift */; };
+		44A76E722759404300FFA113 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A76E712759404300FFA113 /* MainViewController.swift */; };
+		44AA1763275CBA120012BBBF /* CodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AA1762275CBA120012BBBF /* CodeTableViewCell.swift */; };
 		44B17C5F27499F4D00C06576 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B17C5E27499F4D00C06576 /* Path.swift */; };
 		44C74692274AC8B60083F267 /* RepoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C74691274AC8B60083F267 /* RepoTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -38,8 +41,11 @@
 		4447AEB927457CC700B9161B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4447AEBB27457CC700B9161B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4447AEC127458A2500B9161B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		4457227B2758C8570020EB01 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		445E4C382746F80B008EFCA9 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		44736096274D576500801C1A /* CommitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitTableViewCell.swift; sourceTree = "<group>"; };
+		44A76E712759404300FFA113 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		44AA1762275CBA120012BBBF /* CodeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTableViewCell.swift; sourceTree = "<group>"; };
 		44B17C5E27499F4D00C06576 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		44C74691274AC8B60083F267 /* RepoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,20 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		443715A1274F95FC00D72D9E /* Search Cells */ = {
+		443715A1274F95FC00D72D9E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				445E4C382746F80B008EFCA9 /* UserTableViewCell.swift */,
 				44C74691274AC8B60083F267 /* RepoTableViewCell.swift */,
 				44736096274D576500801C1A /* CommitTableViewCell.swift */,
+				44AA1762275CBA120012BBBF /* CodeTableViewCell.swift */,
 			);
-			path = "Search Cells";
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		443F4403274795ED00ED5B32 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				4447AEAE27457CC600B9161B /* ViewController.swift */,
+				44A76E712759404300FFA113 /* MainViewController.swift */,
 				443715A2274F969B00D72D9E /* UserReposViewController.swift */,
 			);
 			path = Controllers;
@@ -78,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				4447AEB027457CC600B9161B /* Main.storyboard */,
-				443715A1274F95FC00D72D9E /* Search Cells */,
+				443715A1274F95FC00D72D9E /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -108,6 +116,7 @@
 				443F44042747960F00ED5B32 /* Views */,
 				443F4403274795ED00ED5B32 /* Controllers */,
 				443F4401274795D100ED5B32 /* Constraints Extension.swift */,
+				4457227B2758C8570020EB01 /* Constants.swift */,
 				4447AEB627457CC700B9161B /* Assets.xcassets */,
 				4447AEB827457CC700B9161B /* LaunchScreen.storyboard */,
 				4447AEBB27457CC700B9161B /* Info.plist */,
@@ -197,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44AA1763275CBA120012BBBF /* CodeTableViewCell.swift in Sources */,
 				4447AEAF27457CC600B9161B /* ViewController.swift in Sources */,
 				44C74692274AC8B60083F267 /* RepoTableViewCell.swift in Sources */,
 				4447AEAB27457CC600B9161B /* AppDelegate.swift in Sources */,
@@ -204,6 +214,8 @@
 				4447AEB527457CC600B9161B /* GitHub.xcdatamodeld in Sources */,
 				4447AEC227458A2500B9161B /* Model.swift in Sources */,
 				445E4C392746F80B008EFCA9 /* UserTableViewCell.swift in Sources */,
+				44A76E722759404300FFA113 /* MainViewController.swift in Sources */,
+				4457227C2758C8570020EB01 /* Constants.swift in Sources */,
 				443715A3274F969B00D72D9E /* UserReposViewController.swift in Sources */,
 				44736097274D576500801C1A /* CommitTableViewCell.swift in Sources */,
 				4447AEAD27457CC600B9161B /* SceneDelegate.swift in Sources */,

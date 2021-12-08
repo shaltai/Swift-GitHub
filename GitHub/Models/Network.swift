@@ -2,7 +2,6 @@ import Foundation
 
 class Network {
    static let shared = Network()
-   var model: Repos?
    
    func fetchData<T: Codable>(path: String,
                               query: String,
@@ -15,7 +14,7 @@ class Network {
          let query = query
          guard let url = URL(string: api + path + query) else { return }
          var request = URLRequest(url: url)
-         request.setValue("token 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", forHTTPHeaderField: "Authorization")
+         request.setValue(Constants.token, forHTTPHeaderField: "Authorization")
          request.setValue("application/vnd.github.v3.text-match+json", forHTTPHeaderField: "Accept")
 
          URLSession.shared.dataTask(with: request) { data, response, error in
