@@ -41,11 +41,4 @@ class UserTableViewCell: UITableViewCell {
                                    leading: avatarImage.trailingAnchor,
                                    padding: UIEdgeInsets(top: 0, left: 8, bottom: 24, right: 8))
    }
-   
-   override func setSelected(_ selected: Bool, animated: Bool) {
-      super.setSelected(selected, animated: animated)
-      
-      // Configure the view for the selected state
-   }
-   
 }

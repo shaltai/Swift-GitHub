@@ -27,9 +27,9 @@ class UserReposViewController: ViewController {
    
    override func setup() {
       resultsTableView.backgroundColor = .systemBackground
-      resultsTableView.separatorStyle = .none
+      resultsTableView.allowsSelection = false
       resultsTableView.rowHeight = UITableView.automaticDimension
-      resultsTableView.estimatedRowHeight = 500
+      resultsTableView.estimatedRowHeight = 200
    }
 }
 
