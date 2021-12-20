@@ -27,7 +27,9 @@ class RepoTableViewCell: UITableViewCell {
    
    func setup() {
       // settings
-      backgroundColor = .systemBackground
+      contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0))
+      contentView.backgroundColor = .systemGray6
+      contentView.layer.cornerRadius = 8
       
       for label in [fullNameLabel, descriptionLabel, languageLabel, stargazersCountLabel, updatedAtLabel] {
          label.numberOfLines = 0

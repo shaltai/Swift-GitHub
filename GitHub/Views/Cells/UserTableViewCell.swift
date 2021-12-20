@@ -8,7 +8,22 @@ class UserTableViewCell: UITableViewCell {
    override func awakeFromNib() {
       super.awakeFromNib()
 
+   }
+   
+   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+      super.init(style: style, reuseIdentifier: reuseIdentifier)
       setup()
+   }
+   
+   required init?(coder: NSCoder) {
+      super.init(coder: coder)
+      setup()
+   }
+   
+   override func layoutSubviews() {
+      super.layoutSubviews()
+      
+      contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0))
    }
    
    func initCell(user: Users.Items) {
@@ -22,23 +37,33 @@ class UserTableViewCell: UITableViewCell {
    
    func setup() {
       // settings
-      backgroundColor = .systemGray6
+      avatarImage.layer.cornerRadius = 8
+      avatarImage.contentMode = .scaleAspectFit
+      avatarImage.clipsToBounds = true
+      contentView.backgroundColor = .systemGray6
+      contentView.layer.cornerRadius = 8
+      for label in [loginLabel, idLabel] {
+         label.numberOfLines = 0
+         label.lineBreakMode = .byCharWrapping
+      }
       // subviews
-      addSubview(avatarImage)
-      addSubview(loginLabel)
-      addSubview(idLabel)
+      contentView.addSubview(avatarImage)
+      contentView.addSubview(loginLabel)
+      contentView.addSubview(idLabel)
       // constraints
-      avatarImage.setupEdgeConstraints(top: topAnchor,
-                                       leading: leadingAnchor,
-                                       size: CGSize(width: 128.0, height: 128.0)
-      )
-      loginLabel.setupEdgeConstraints(top: topAnchor,
-                                      trailing: trailingAnchor,
+      avatarImage.setupEdgeConstraints(top: contentView.topAnchor,
+                                       leading: contentView.leadingAnchor,
+                                       size: CGSize(width: 128, height: 128))
+      
+      loginLabel.setupEdgeConstraints(top: contentView.topAnchor,
+                                      trailing: contentView.trailingAnchor,
+                                      bottom: idLabel.topAnchor,
                                       leading: avatarImage.trailingAnchor,
-                                      padding: UIEdgeInsets(top: 32, left: 8, bottom: 16, right: 8))
-      idLabel.setupEdgeConstraints(top: loginLabel.bottomAnchor,
-                                   trailing: trailingAnchor,
+                                      padding: UIEdgeInsets(top: 40, left: 8, bottom: 16, right: 8))
+      
+      idLabel.setupEdgeConstraints(trailing: contentView.trailingAnchor,
+                                   bottom: contentView.bottomAnchor,
                                    leading: avatarImage.trailingAnchor,
-                                   padding: UIEdgeInsets(top: 0, left: 8, bottom: 24, right: 8))
+                                   padding: UIEdgeInsets(top: 0, left: 8, bottom: 40, right: 8))
    }
 }

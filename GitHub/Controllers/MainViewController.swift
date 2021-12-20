@@ -23,7 +23,6 @@ class MainViewController: ViewController {
          let user = userItem.login
          
          Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
-            
             vc.initUserRepos(repos: repos, user: user)
             vc.resultsTableView.reloadData()
          }
@@ -34,7 +33,10 @@ class MainViewController: ViewController {
    
    override func setup() {
       title = "Search in GitHub"
+      searchResultsTableView.separatorStyle = .none
       searchResultsTableView.backgroundColor = .systemBackground
+      searchResultsTableView.rowHeight = UITableView.automaticDimension
+      searchResultsTableView.estimatedRowHeight = 200
    }
    
    // Setup search
@@ -46,7 +48,6 @@ class MainViewController: ViewController {
       searchController.searchBar.scopeButtonTitles = ["Users", "Repos", "Commits"]
       searchController.automaticallyShowsScopeBar = false
       searchController.searchBar.showsScopeBar = true
-//      definesPresentationContext = true
    }
 }
 
@@ -86,9 +87,9 @@ extension MainViewController {
       performSegue(withIdentifier: "ShowUserRepos", sender: indexPath)
    }
    
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      return 128
-   }
+//   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//      return 136
+//   }
 }
 
 // Search
