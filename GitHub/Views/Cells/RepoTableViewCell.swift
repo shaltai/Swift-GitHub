@@ -13,6 +13,12 @@ class RepoTableViewCell: UITableViewCell {
       setup()
    }
    
+   override func layoutSubviews() {
+      super.layoutSubviews()
+      
+      contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16))
+   }
+   
    func initCell(repo: Repos.Items) {
 
       fullNameLabel.text = repo.full_name
@@ -27,7 +33,6 @@ class RepoTableViewCell: UITableViewCell {
    
    func setup() {
       // settings
-      contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0))
       contentView.backgroundColor = .systemGray6
       contentView.layer.cornerRadius = 8
       
@@ -46,14 +51,14 @@ class RepoTableViewCell: UITableViewCell {
                                          trailing: trailingAnchor,
                                          bottom: descriptionLabel.topAnchor,
                                          leading: leadingAnchor,
-                                         padding: UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16))
+                                         padding: UIEdgeInsets(top: 16, left: 32, bottom: 8, right: 32))
       descriptionLabel.setupEdgeConstraints(trailing: trailingAnchor,
                                             bottom: stackView.topAnchor,
                                             leading: leadingAnchor,
-                                            padding: UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16))
+                                            padding: UIEdgeInsets(top: 0, left: 32, bottom: 8, right: 32))
       stackView.setupEdgeConstraints(trailing: trailingAnchor,
                                      bottom: bottomAnchor,
                                      leading: leadingAnchor,
-                                     padding: UIEdgeInsets(top: 0, left: 16, bottom: 24, right: 16))
+                                     padding: UIEdgeInsets(top: 0, left: 32, bottom: 24, right: 32))
    }
 }

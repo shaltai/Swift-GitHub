@@ -21,6 +21,7 @@ class UserReposViewController: ViewController {
       searchController.delegate = self
       searchController.searchBar.delegate = self
       searchController.searchResultsUpdater = self
+      searchController.searchBar.placeholder = "Search for Code"
       navigationItem.searchController = searchController
       navigationItem.hidesSearchBarWhenScrolling = false
    }
@@ -28,6 +29,7 @@ class UserReposViewController: ViewController {
    override func setup() {
       resultsTableView.backgroundColor = .systemBackground
       resultsTableView.allowsSelection = false
+      resultsTableView.separatorStyle = .none
       resultsTableView.rowHeight = UITableView.automaticDimension
       resultsTableView.estimatedRowHeight = 200
       resultsTableView.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)

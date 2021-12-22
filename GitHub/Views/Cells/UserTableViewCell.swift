@@ -23,7 +23,7 @@ class UserTableViewCell: UITableViewCell {
    override func layoutSubviews() {
       super.layoutSubviews()
       
-      contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0))
+      contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16))
    }
    
    func initCell(user: Users.Items) {

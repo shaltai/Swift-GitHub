@@ -10,23 +10,21 @@ class MainViewController: ViewController {
       super.viewDidLoad()
       
    }
-   
+   // segue on user cell click to see his repos
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if let vc = segue.destination as? UserReposViewController,
          segue.identifier == "ShowUserRepos" {
-         
-         // Index
+         // index
          guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
-         
-         // User name at particular index
+         // user name at particular index
          let userItem = models[indexPath.row] as! Users.Items
          let user = userItem.login
-         
+         // request and init user repos
          Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
             vc.initUserRepos(repos: repos, user: user)
             vc.resultsTableView.reloadData()
          }
-         // Deselect row
+         // deselect row
          searchResultsTableView.deselectRow(at: indexPath, animated: true)
       }
    }
@@ -44,6 +42,7 @@ class MainViewController: ViewController {
       searchController.delegate = self
       searchController.searchBar.delegate = self
       searchController.searchResultsUpdater = self
+      searchController.searchBar.placeholder = "Search for Users"
       navigationItem.searchController = searchController
       searchController.searchBar.scopeButtonTitles = ["Users", "Repos", "Commits"]
       searchController.automaticallyShowsScopeBar = false
@@ -86,10 +85,6 @@ extension MainViewController {
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       performSegue(withIdentifier: "ShowUserRepos", sender: indexPath)
    }
-   
-//   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//      return 136
-//   }
 }
 
 // Search
@@ -143,10 +138,13 @@ extension MainViewController {
    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
       switch searchBar.selectedScopeButtonIndex {
       case 0:
+         searchController.searchBar.placeholder = "Search for Users"
          path = .users
       case 1:
+         searchController.searchBar.placeholder = "Search for Repositories"
          path = .repositories
       case 2:
+         searchController.searchBar.placeholder = "Search for Commits"
          path = .commits
       default:
          break
