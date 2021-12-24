@@ -63,7 +63,7 @@
                     <navigationItem key="navigationItem" id="c1f-9S-5wi"/>
                     <connections>
                         <outlet property="searchResultsTableView" destination="Edj-vt-HJo" id="7xd-vq-DB1"/>
-                        <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowUserRepos" id="Sxy-RY-RLn"/>
+                        <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowUserRepos" id="oZi-HY-s2L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

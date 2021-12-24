@@ -92,7 +92,6 @@ extension MainViewController {
    
    override func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
       guard let text = searchController.searchBar.text else { return }
-      
       let query = "?q=\(text)"
       
       // Request
@@ -127,7 +126,6 @@ extension MainViewController {
       guard let text = searchController.searchBar.text else { return }
       
       if text.isEmpty {
-         
          // Reset table
          models = []
          searchResultsTableView.reloadData()
@@ -136,16 +134,56 @@ extension MainViewController {
    
    // Scope buttons
    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+      // Search query
+      guard let text = searchController.searchBar.text else { return }
+      let query = "?q=\(text)"
+      // Search scope selecting logic
       switch searchBar.selectedScopeButtonIndex {
+      // Users
       case 0:
+         // Placeholder
          searchController.searchBar.placeholder = "Search for Users"
+         // Change path value
          path = .users
+         // Request and populate models array
+         Network.shared.fetchData(path: path.rawValue, query: query, type: Users.self) { [weak self] users in
+            if let self = self {
+               self.models = users.items
+               DispatchQueue.main.async {
+                  self.searchResultsTableView.reloadData()
+               }
+            }
+         }
+      // Repositories
       case 1:
+         // Placeholder
          searchController.searchBar.placeholder = "Search for Repositories"
+         // Change path value
          path = .repositories
+         // Request and populate models array
+         Network.shared.fetchData(path: path.rawValue, query: query, type: Repos.self) { [weak self] repos in
+            if let self = self {
+               self.models = repos.items
+               DispatchQueue.main.async {
+                  self.searchResultsTableView.reloadData()
+               }
+            }
+         }
+      // Commits
       case 2:
+         // Placeholder
          searchController.searchBar.placeholder = "Search for Commits"
+         // Change path value
          path = .commits
+         // Request and populate models array
+         Network.shared.fetchData(path: path.rawValue, query: query, type: Commits.self) { [weak self] commits in
+            if let self = self {
+               self.models = commits.items
+               DispatchQueue.main.async {
+                  self.searchResultsTableView.reloadData()
+               }
+            }
+         }
       default:
          break
       }
