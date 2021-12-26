@@ -11,6 +11,7 @@ struct Users: Codable {
 
 struct Repos: Codable {
    struct Items: Codable {
+      let name: String
       let full_name: String
       let description: String?
       let language: String?
@@ -19,8 +20,16 @@ struct Repos: Codable {
       var updatedAt: Date {
          toDate(from: updated_at)
       }
+      struct Owner: Codable {
+         let login: String
+      }
+      let owner: Owner
    }
    let items: [Items]
+}
+
+struct RepoDetails: Codable {
+   let download_url: String
 }
 
 struct Commits: Codable {

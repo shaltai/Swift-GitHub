@@ -10,22 +10,60 @@ class MainViewController: ViewController {
       super.viewDidLoad()
       
    }
-   // segue on user cell click to see his repos
+   // segue on cell click
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      if let vc = segue.destination as? UserReposViewController,
-         segue.identifier == "ShowUserRepos" {
-         // index
-         guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
-         // user name at particular index
-         let userItem = models[indexPath.row] as! Users.Items
-         let user = userItem.login
-         // request and init user repos
-         Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
-            vc.initUserRepos(repos: repos, user: user)
-            vc.resultsTableView.reloadData()
+      if let vc = segue.destination as? UserReposViewController {
+         switch segue.identifier {
+            
+         case "ShowUserRepos":
+            // index
+            guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
+            // user name at particular index
+            let userItem = models[indexPath.row] as! Users.Items
+            let user = userItem.login
+            // request and init user repos
+            Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
+               vc.initUserRepos(repos: repos, user: user)
+               vc.selectedScopeButtonIndex = 0
+               vc.resultsTableView.reloadData()
+            }
+            // deselect row
+            searchResultsTableView.deselectRow(at: indexPath, animated: true)
+            
+         case "ShowRepoDetail":
+            // index
+            guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
+            // user name at particular index
+            let reposItem = models[indexPath.row] as! Repos.Items
+            let user = reposItem.owner.login
+            let repo = reposItem.name
+            // request and init user repos
+            Network.shared.fetchData(path: "/repos", query: "/\(user)/\(repo)/readme", type: RepoDetails.self) { repoDetails in
+               vc.initReposDetail(details: repoDetails, user: user, repo: repo)
+               vc.selectedScopeButtonIndex = 1
+               vc.resultsTableView.reloadData()
+            }
+            // deselect row
+            searchResultsTableView.deselectRow(at: indexPath, animated: true)
+         
+         case "ShowCommitFiles":
+            // index
+            guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
+            // user name at particular index
+            let userItem = models[indexPath.row] as! Users.Items
+            let user = userItem.login
+            // request and init user repos
+            Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
+               vc.initUserRepos(repos: repos, user: user)
+               vc.selectedScopeButtonIndex = 2
+               vc.resultsTableView.reloadData()
+            }
+            // deselect row
+            searchResultsTableView.deselectRow(at: indexPath, animated: true)
+            
+         default:
+            break
          }
-         // deselect row
-         searchResultsTableView.deselectRow(at: indexPath, animated: true)
       }
    }
    
@@ -81,10 +119,6 @@ extension MainViewController {
          return cell
       }
    }
-   
-   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      performSegue(withIdentifier: "ShowUserRepos", sender: indexPath)
-   }
 }
 
 // Search
@@ -139,48 +173,54 @@ extension MainViewController {
       let query = "?q=\(text)"
       // Search scope selecting logic
       switch searchBar.selectedScopeButtonIndex {
-      // Users
+      // Search for users
       case 0:
          // Placeholder
          searchController.searchBar.placeholder = "Search for Users"
          // Change path value
          path = .users
          // Request and populate models array
-         Network.shared.fetchData(path: path.rawValue, query: query, type: Users.self) { [weak self] users in
-            if let self = self {
-               self.models = users.items
-               DispatchQueue.main.async {
-                  self.searchResultsTableView.reloadData()
+         if !text.isEmpty {
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Users.self) { [weak self] users in
+               if let self = self {
+                  self.models = users.items
+                  DispatchQueue.main.async {
+                     self.searchResultsTableView.reloadData()
+                  }
                }
             }
          }
-      // Repositories
+      // Search for repositories
       case 1:
          // Placeholder
          searchController.searchBar.placeholder = "Search for Repositories"
          // Change path value
          path = .repositories
          // Request and populate models array
-         Network.shared.fetchData(path: path.rawValue, query: query, type: Repos.self) { [weak self] repos in
-            if let self = self {
-               self.models = repos.items
-               DispatchQueue.main.async {
-                  self.searchResultsTableView.reloadData()
+         if !text.isEmpty {
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Repos.self) { [weak self] repos in
+               if let self = self {
+                  self.models = repos.items
+                  DispatchQueue.main.async {
+                     self.searchResultsTableView.reloadData()
+                  }
                }
             }
          }
-      // Commits
+      // Search for commits
       case 2:
          // Placeholder
          searchController.searchBar.placeholder = "Search for Commits"
          // Change path value
          path = .commits
          // Request and populate models array
-         Network.shared.fetchData(path: path.rawValue, query: query, type: Commits.self) { [weak self] commits in
-            if let self = self {
-               self.models = commits.items
-               DispatchQueue.main.async {
-                  self.searchResultsTableView.reloadData()
+         if !text.isEmpty {
+            Network.shared.fetchData(path: path.rawValue, query: query, type: Commits.self) { [weak self] commits in
+               if let self = self {
+                  self.models = commits.items
+                  DispatchQueue.main.async {
+                     self.searchResultsTableView.reloadData()
+                  }
                }
             }
          }

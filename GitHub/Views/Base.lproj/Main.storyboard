@@ -27,6 +27,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowUserRepos" id="XgJ-Jn-WFV"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepoTableViewCell" id="BkP-pL-SO5" customClass="RepoTableViewCell" customModule="GitHub" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="88" width="375" height="43.5"/>
@@ -35,6 +38,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowRepoDetail" id="5PJ-Pg-pGw"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommitTableViewCell" id="AwU-Rs-TKp" customClass="CommitTableViewCell" customModule="GitHub" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="131.5" width="375" height="43.5"/>
@@ -43,6 +49,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowCommitFiles" id="5Ec-ME-N0j"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -63,7 +72,6 @@
                     <navigationItem key="navigationItem" id="c1f-9S-5wi"/>
                     <connections>
                         <outlet property="searchResultsTableView" destination="Edj-vt-HJo" id="7xd-vq-DB1"/>
-                        <segue destination="N7b-4Z-ssh" kind="show" identifier="ShowUserRepos" id="oZi-HY-s2L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -91,6 +99,14 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qJv-LS-YX8" id="QTa-3Z-LHz">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepoDetailsTableViewCell" id="Oz9-pW-Y0P" customClass="RepoDetailsTableViewCell" customModule="GitHub" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="131.5" width="375" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oz9-pW-Y0P" id="1PK-lq-UpD">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
@@ -129,6 +145,9 @@
             <point key="canvasLocation" x="138.40000000000001" y="69.715142428785612"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5PJ-Pg-pGw"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

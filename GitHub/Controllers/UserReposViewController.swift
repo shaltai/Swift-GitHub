@@ -3,12 +3,20 @@ import UIKit
 class UserReposViewController: ViewController {
    @IBOutlet var resultsTableView: UITableView!
    
+   var selectedScopeButtonIndex: Int = 0
    private var models: [Codable] = []
    private var user: String = ""
+   
+//   private var readme: String = ""
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
+   }
+   
+   func initReposDetail(details: RepoDetails, user: String, repo: String) {
+      self.models = [details]
+      self.title = "\(user) \\ \(repo)"
    }
    
    func initUserRepos (repos: [Repos.Items], user: String) {
@@ -43,19 +51,39 @@ extension UserReposViewController {
    }
    
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      if searchController.searchBar.text != "" {
+      switch selectedScopeButtonIndex {
          
-         let cell = tableView.dequeueReusableCell(withIdentifier: "CodeTableViewCell", for: indexPath) as! CodeTableViewCell
-         cell.initCell(code: models[indexPath.row] as! Code.Items)
-         cell.sizeToFit()
+      // Search for users
+      case 0:
+         if searchController.searchBar.text != "" {
+            
+            // Cell with code samples
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CodeTableViewCell", for: indexPath) as! CodeTableViewCell
+            cell.initCell(code: models[indexPath.row] as! Code.Items)
+            cell.sizeToFit()
+            return cell
+            
+         } else {
+            
+            // Cell with user repositories
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RepoTableViewCell", for: indexPath) as! RepoTableViewCell
+            cell.initCell(repo: models[indexPath.row] as! Repos.Items)
+            return cell
+            
+         }
+      // Search for repositories
+      case 1:
+         // Hide searchbar
+         searchController.searchBar.isHidden = true
+         // Cell with repositoru details
+         let cell = tableView.dequeueReusableCell(withIdentifier: "RepoDetailsTableViewCell", for: indexPath) as! RepoDetailsTableViewCell
+         cell.initCell(details: models[indexPath.row] as! RepoDetails)
          return cell
          
-      } else {
-         
+      default:
          let cell = tableView.dequeueReusableCell(withIdentifier: "RepoTableViewCell", for: indexPath) as! RepoTableViewCell
          cell.initCell(repo: models[indexPath.row] as! Repos.Items)
          return cell
-         
       }
    }
 }
