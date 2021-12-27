@@ -37,10 +37,10 @@ class MainViewController: ViewController {
             let reposItem = models[indexPath.row] as! Repos.Items
             let user = reposItem.owner.login
             let repo = reposItem.name
-            // request and init user repos
+            // request and init repo details
             Network.shared.fetchData(path: "/repos", query: "/\(user)/\(repo)/readme", type: RepoDetails.self) { repoDetails in
-               vc.initReposDetail(details: repoDetails, user: user, repo: repo)
                vc.selectedScopeButtonIndex = 1
+               vc.initReposDetail(details: repoDetails, user: user, repo: repo)
                vc.resultsTableView.reloadData()
             }
             // deselect row
@@ -77,11 +77,12 @@ class MainViewController: ViewController {
    
    // Setup search
    override func setupSearchController() {
+      navigationItem.searchController = searchController
       searchController.delegate = self
       searchController.searchBar.delegate = self
       searchController.searchResultsUpdater = self
+      searchController.definesPresentationContext = true
       searchController.searchBar.placeholder = "Search for Users"
-      navigationItem.searchController = searchController
       searchController.searchBar.scopeButtonTitles = ["Users", "Repos", "Commits"]
       searchController.automaticallyShowsScopeBar = false
       searchController.searchBar.showsScopeBar = true

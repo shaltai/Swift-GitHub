@@ -30,6 +30,7 @@ class UserReposViewController: ViewController {
       searchController.searchBar.delegate = self
       searchController.searchResultsUpdater = self
       searchController.searchBar.placeholder = "Search for Code"
+      searchController.definesPresentationContext = true
       navigationItem.searchController = searchController
       navigationItem.hidesSearchBarWhenScrolling = false
    }
@@ -60,7 +61,6 @@ extension UserReposViewController {
             // Cell with code samples
             let cell = tableView.dequeueReusableCell(withIdentifier: "CodeTableViewCell", for: indexPath) as! CodeTableViewCell
             cell.initCell(code: models[indexPath.row] as! Code.Items)
-            cell.sizeToFit()
             return cell
             
          } else {
@@ -71,14 +71,18 @@ extension UserReposViewController {
             return cell
             
          }
+         
       // Search for repositories
       case 1:
          // Hide searchbar
-         searchController.searchBar.isHidden = true
+         self.searchController.isActive = false
+         self.navigationItem.searchController = nil
          // Cell with repositoru details
          let cell = tableView.dequeueReusableCell(withIdentifier: "RepoDetailsTableViewCell", for: indexPath) as! RepoDetailsTableViewCell
          cell.initCell(details: models[indexPath.row] as! RepoDetails)
          return cell
+         
+      // Search for commits
          
       default:
          let cell = tableView.dequeueReusableCell(withIdentifier: "RepoTableViewCell", for: indexPath) as! RepoTableViewCell
