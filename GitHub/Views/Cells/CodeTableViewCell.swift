@@ -41,15 +41,15 @@ class CodeTableViewCell: UITableViewCell {
    }
    
    func setup() {
-      // stack settings
+      // Stack settings
       codeStackView.axis = .vertical
       codeStackView.distribution = .equalSpacing
       codeStackView.spacing = 1
       codeStackView.layer.cornerRadius = 8
       codeStackView.layer.masksToBounds = true
-      // subviews
+      // Subviews
       contentView.addSubview(codeStackView)
-      // constraints
+      // Constraints
       codeStackView.setupEdgeConstraints(top: contentView.safeAreaLayoutGuide.topAnchor,
                                          trailing: contentView.safeAreaLayoutGuide.trailingAnchor,
                                          bottom: contentView.safeAreaLayoutGuide.bottomAnchor,

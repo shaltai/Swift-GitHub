@@ -10,55 +10,64 @@ class MainViewController: ViewController {
       super.viewDidLoad()
       
    }
-   // segue on cell click
+   // Segue on cell click
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       if let vc = segue.destination as? UserReposViewController {
          switch segue.identifier {
             
          case "ShowUserRepos":
-            // index
+            // Index
             guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
-            // user name at particular index
+            // User name at particular index
             let userItem = models[indexPath.row] as! Users.Items
             let user = userItem.login
-            // request and init user repos
-            Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
+            // Request and init user repos
+            Network.shared.fetchData(path: "/users",
+                                     query: "/\(user)/repos",
+                                     type: [Repos.Items].self) { repos in
                vc.initUserRepos(repos: repos, user: user)
                vc.selectedScopeButtonIndex = 0
                vc.resultsTableView.reloadData()
             }
-            // deselect row
+            // Deselect row
             searchResultsTableView.deselectRow(at: indexPath, animated: true)
             
          case "ShowRepoDetail":
-            // index
+            // Index
             guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
-            // user name at particular index
+            // User name at particular index
             let reposItem = models[indexPath.row] as! Repos.Items
             let user = reposItem.owner.login
             let repo = reposItem.name
-            // request and init repo details
-            Network.shared.fetchData(path: "/repos", query: "/\(user)/\(repo)/readme", type: RepoDetails.self) { repoDetails in
+            // Request and init repo details
+            Network.shared.fetchData(path: "/repos",
+                                     query: "/\(user)/\(repo)/readme",
+                                     type: RepoDetails.self) { repoDetails in
                vc.selectedScopeButtonIndex = 1
-               vc.initReposDetail(details: repoDetails, user: user, repo: repo)
+               vc.initReposDetails(details: repoDetails, user: user, repo: repo)
                vc.resultsTableView.reloadData()
             }
-            // deselect row
+            // Deselect row
             searchResultsTableView.deselectRow(at: indexPath, animated: true)
          
          case "ShowCommitFiles":
-            // index
+            // Index
             guard let indexPath = searchResultsTableView.indexPathForSelectedRow else { return }
-            // user name at particular index
-            let userItem = models[indexPath.row] as! Users.Items
-            let user = userItem.login
-            // request and init user repos
-            Network.shared.fetchData(path: "/users", query: "/\(user)/repos", type: [Repos.Items].self) { repos in
-               vc.initUserRepos(repos: repos, user: user)
+            // User name at particular index
+            let commitItem = models[indexPath.row] as! Commits.Items
+            let user = commitItem.repository.owner.login
+            let repo = commitItem.repository.name
+            let sha = commitItem.sha
+            let message = commitItem.commit.message
+            // Request and init commit details
+            Network.shared.fetchData(path: "/repos",
+                                     query: "/\(user)/\(repo)/commits/\(sha)",
+                                     type: CommitDetails.self) { commitDetails in
+               vc.initCommitDetails(details: commitDetails, message: message)
                vc.selectedScopeButtonIndex = 2
                vc.resultsTableView.reloadData()
             }
-            // deselect row
+            // Deselect row
             searchResultsTableView.deselectRow(at: indexPath, animated: true)
             
          default:

@@ -7,7 +7,6 @@ class RepoDetailsTableViewCell: UITableViewCell {
       super.awakeFromNib()
       
       setup()
-
    }
    
    override func layoutSubviews() {
@@ -24,14 +23,11 @@ class RepoDetailsTableViewCell: UITableViewCell {
          markdownOptions.allowsExtendedAttributes = true
          markdownOptions.interpretedSyntax = .inlineOnlyPreservingWhitespace
          readmeTextView.attributedText = try? NSAttributedString(markdown: detailsContent, options: markdownOptions)
-//         readmeTextView.attributedText = try? NSAttributedString(markdown: detailsContent)
       } catch {
          print("Error is: \(error)")
       }
-      
    }
          
-   
    func setup() {
       readmeTextView.allowsEditingTextAttributes = false
       readmeTextView.isScrollEnabled = false
