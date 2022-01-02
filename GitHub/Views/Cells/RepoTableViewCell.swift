@@ -20,15 +20,20 @@ class RepoTableViewCell: UITableViewCell {
    }
    
    func initCell(repo: Repos.Items) {
-
-      fullNameLabel.text = repo.full_name
-      descriptionLabel.text = repo.description
-      languageLabel.text = repo.language
-      stargazersCountLabel.text = "⭐️ \(repo.stargazers_count)"
       
-      let formatter = DateFormatter()
-      formatter.dateFormat = "E, d MMM"
-      updatedAtLabel.text = formatter.string(from: repo.updatedAt)
+//      fullNameLabel.attributedText = NSAttributedString(string: repo.full_name,
+//                                                        attributes: Typography.h3)
+//      descriptionLabel.attributedText = NSAttributedString(string: repo.description ?? "",
+//                                                           attributes: Typography.p3)
+//      languageLabel.attributedText = NSAttributedString(string: repo.language ?? "",
+//                                                        attributes: Typography.p3)
+//      stargazersCountLabel.attributedText = NSAttributedString(string: "⭐️ \(repo.stargazers_count)",
+//                                                               attributes: Typography.p3)
+      
+//      let formatter = DateFormatter()
+//      formatter.dateFormat = "E, d MMM"
+//      updatedAtLabel.attributedText = NSAttributedString(string: formatter.string(from: repo.updatedAt),
+//                                                         attributes: Typography.p3)
    }
    
    func setup() {
@@ -38,7 +43,7 @@ class RepoTableViewCell: UITableViewCell {
       
       for label in [fullNameLabel, descriptionLabel, languageLabel, stargazersCountLabel, updatedAtLabel] {
          label.numberOfLines = 0
-         label.lineBreakMode = .byCharWrapping
+//         label.lineBreakMode = .byCharWrapping
       }
       // subviews
       let stackView = UIStackView(arrangedSubviews: [stargazersCountLabel, languageLabel, updatedAtLabel])
@@ -55,7 +60,7 @@ class RepoTableViewCell: UITableViewCell {
       descriptionLabel.setupEdgeConstraints(trailing: trailingAnchor,
                                             bottom: stackView.topAnchor,
                                             leading: leadingAnchor,
-                                            padding: UIEdgeInsets(top: 0, left: 32, bottom: 8, right: 32))
+                                            padding: UIEdgeInsets(top: 0, left: 32, bottom: 16, right: 32))
       stackView.setupEdgeConstraints(trailing: trailingAnchor,
                                      bottom: bottomAnchor,
                                      leading: leadingAnchor,
