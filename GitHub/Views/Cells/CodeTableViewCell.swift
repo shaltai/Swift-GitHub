@@ -27,7 +27,9 @@ class CodeTableViewCell: UITableViewCell {
          // label settings
          let codeLabel = UILabel()
          codeLabel.numberOfLines = 0
-         codeLabel.text = code.text_matches[match].fragment
+         codeLabel.attributedText = NSMutableAttributedString(string: code.text_matches[match].fragment).setupAttributes(style: .paragraph(level: .p3),
+                                                                                                                         align: .left,
+                                                                                                                         color: .black)
          // subviews
          view.addSubview(codeLabel)
          codeStackView.addArrangedSubview(view)

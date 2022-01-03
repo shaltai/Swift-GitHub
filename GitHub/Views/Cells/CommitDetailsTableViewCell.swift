@@ -27,10 +27,14 @@ class CommitDetailsTableViewCell: UITableViewCell {
          // Labels settings
          let fileName = UILabel()
          fileName.numberOfLines = 0
-         fileName.text = details.files[file].filename
+         fileName.attributedText = NSMutableAttributedString(string: details.files[file].filename).setupAttributes(style: .heading(level: .h5),
+                                                                                                                   align: .left,
+                                                                                                                   color: .black)
          let patch = UILabel()
          patch.numberOfLines = 0
-         patch.text = details.files[file].patch
+         patch.attributedText = NSMutableAttributedString(string: details.files[file].patch ?? "").setupAttributes(style: .paragraph(level: .p3),
+                                                                                                                   align: .left,
+                                                                                                                   color: .black)
          // subviews
          view.addSubview(fileName)
          view.addSubview(patch)

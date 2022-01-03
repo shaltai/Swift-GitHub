@@ -1,18 +1,18 @@
 import UIKit
 
-enum Heading {
-   case h1, h2, h3, h4, h5, h6
-}
-
-enum Overheading {
-   case o1, o2, o3
-}
-
-enum Paragraph {
-   case p1, p2, p3
-}
 
 enum TextStyle {
+   enum Heading {
+      case h1, h2, h3, h4, h5, h6
+   }
+   
+   enum Overheading {
+      case o1, o2, o3
+   }
+   
+   enum Paragraph {
+      case p1, p2, p3
+   }
    case heading(level: Heading)
    case paragraph(level: Paragraph)
    case overheading(level: Overheading)
@@ -67,7 +67,7 @@ extension NSMutableAttributedString {
          case .p2:
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 16, weight: .regular)
          case .p3:
-            attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 16, weight: .regular)
+            attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 14, weight: .regular)
          }
 
       case .overheading(let level):
@@ -84,7 +84,7 @@ extension NSMutableAttributedString {
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 16, weight: .regular)
          case .o3:
             attributes[NSAttributedString.Key.kern] = 2.0
-            attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 16, weight: .regular)
+            attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 14, weight: .regular)
          }
       }
       self.addAttributes(attributes, range: NSRange(location: 0, length: length))

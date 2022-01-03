@@ -20,13 +20,24 @@ class CommitTableViewCell: UITableViewCell {
    }
    
    func initCell(commit: Commits.Items) {
-      fullNameLabel.text = commit.repository.full_name
-      messageLabel.text = commit.commit.message
-      committerLabel.text = commit.commit.committer.name
+      fullNameLabel.attributedText = NSMutableAttributedString(string: commit.repository.full_name).setupAttributes(style: .heading(level: .h5),
+                                                                                                                    align: .left,
+                                                                                                                    color: .black)
+      messageLabel.attributedText = NSMutableAttributedString(string: commit.commit.message).setupAttributes(style: .paragraph(level: .p3),
+                                                                                                             align: .left,
+                                                                                                             color: .black)
+      committerLabel.attributedText = NSMutableAttributedString(string: commit.commit.committer.name).setupAttributes(style: .paragraph(level: .p3),
+                                                                                                                      align: .left,
+                                                                                                                      color: .systemGray)
       let formatter = DateFormatter()
       formatter.dateFormat = "E, d MMM"
-      commitDateLabel.text = " committed \(formatter.string(from: commit.commit.committer.commitDate))"
-      shaLabel.text = String(commit.sha.prefix(6))
+      let dateString = " committed \(formatter.string(from: commit.commit.committer.commitDate))"
+      commitDateLabel.attributedText = NSMutableAttributedString(string: dateString).setupAttributes(style: .paragraph(level: .p3),
+                                                                                                     align: .left,
+                                                                                                     color: .systemGray)
+      shaLabel.attributedText = NSMutableAttributedString(string: "\(commit.sha.prefix(6))").setupAttributes(style: .heading(level: .h5),
+                                                                                                             align: .left,
+                                                                                                             color: .systemGray)
    }
    
    func setup() {
@@ -66,7 +77,6 @@ class CommitTableViewCell: UITableViewCell {
                                            trailing: view.trailingAnchor,
                                            bottom: committerLabel.bottomAnchor,
                                            leading: committerLabel.trailingAnchor)
-//      shaLabel.firstBaselineAnchor.constraint(equalTo: fullNameLabel.firstBaselineAnchor).isActive = true
       shaLabel.setupEdgeConstraints(top: fullNameLabel.topAnchor,
                                     trailing: contentView.trailingAnchor,
                                     bottom: fullNameLabel.bottomAnchor,

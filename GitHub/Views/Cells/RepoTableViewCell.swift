@@ -21,19 +21,24 @@ class RepoTableViewCell: UITableViewCell {
    
    func initCell(repo: Repos.Items) {
       
-//      fullNameLabel.attributedText = NSAttributedString(string: repo.full_name,
-//                                                        attributes: Typography.h3)
-//      descriptionLabel.attributedText = NSAttributedString(string: repo.description ?? "",
-//                                                           attributes: Typography.p3)
-//      languageLabel.attributedText = NSAttributedString(string: repo.language ?? "",
-//                                                        attributes: Typography.p3)
-//      stargazersCountLabel.attributedText = NSAttributedString(string: "⭐️ \(repo.stargazers_count)",
-//                                                               attributes: Typography.p3)
+      fullNameLabel.attributedText = NSMutableAttributedString.init(string: repo.full_name).setupAttributes(style: .heading(level: .h5),
+                                                                                                            align: .left,
+                                                                                                            color: .black)
+      descriptionLabel.attributedText = NSMutableAttributedString(string: repo.description ?? "").setupAttributes(style: .paragraph(level: .p3),
+                                                                                                                  align: .left,
+                                                                                                                  color: .black)
+      languageLabel.attributedText = NSMutableAttributedString(string: repo.language ?? "").setupAttributes(style: .paragraph(level: .p3),
+                                                                                                            align: .left,
+                                                                                                            color: .systemGray)
+      stargazersCountLabel.attributedText = NSMutableAttributedString(string: "⭐️ \(repo.stargazers_count)").setupAttributes(style: .paragraph(level: .p3),
+                                                                                                                             align: .left,
+                                                                                                                             color: .systemGray)
       
-//      let formatter = DateFormatter()
-//      formatter.dateFormat = "E, d MMM"
-//      updatedAtLabel.attributedText = NSAttributedString(string: formatter.string(from: repo.updatedAt),
-//                                                         attributes: Typography.p3)
+      let formatter = DateFormatter()
+      formatter.dateFormat = "E, d MMM"
+      updatedAtLabel.attributedText = NSMutableAttributedString(string: formatter.string(from: repo.updatedAt)).setupAttributes(style: .paragraph(level: .p3),
+                                                                                                                                align: .left,
+                                                                                                                                color: .systemGray)
    }
    
    func setup() {
